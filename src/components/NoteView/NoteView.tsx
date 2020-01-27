@@ -13,14 +13,24 @@ export const NoteView = () => {
   useEffect(() => {
     notesService.getNote(selectedNoteId).then(data => {
       setNote(data)
-      setNoteBody(data.body || '')
     })
   }, [selectedNoteId])
+
+  useEffect(() => {
+    setNoteBody(note?.body || '')
+  }, [note])
 
   const handleTextAreaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setNoteBody(event.target.value)
+    const {
+      target: { value },
+    } = event
+    setNoteBody(value)
+    notesService
+      .updateNote(selectedNoteId, { ...note, body: value })
+      .then(data => setNote(data))
+      .finally(() => console.log('UPDATED', selectedNoteId))
   }
 
   return (
