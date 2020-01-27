@@ -2,19 +2,20 @@ import React from 'react'
 import { OutlinedInput } from '@material-ui/core'
 
 interface NoteTextAreaProps {
-  value: string
+  value?: string
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const NoteTextArea = (props: NoteTextAreaProps) => {
+export const NoteTextArea = ({ value = '', onChange }: NoteTextAreaProps) => {
   return (
     <OutlinedInput
-      onChange={props.onChange}
+      onChange={onChange}
       fullWidth
       multiline
       rowsMin={3}
+      rows={5}
       rowsMax={50}
-      value={props.value}
+      value={value}
     />
   )
 }

@@ -2,8 +2,15 @@
   "notes": [
     {
       "title": "New Note",
-      "lastEdited": "2020-01-27T23:34:11.659Z",
-      "id": 1
+      "lastEdited": "2020-01-27T23:54:01.876Z",
+      "id": 1,
+      "body": "Note 1 Updated again"
+    },
+    {
+      "title": "New Note",
+      "lastEdited": "2020-01-27T23:54:50.622Z",
+      "id": 2,
+      "body": "Note 2 updated"
     }
   ]
 }

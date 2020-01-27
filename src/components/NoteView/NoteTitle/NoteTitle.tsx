@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 
 interface NoteTitleProps {
   value?: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 export const NoteTitle = (props: NoteTitleProps) => {
   const [hoveringTitle, setHoveringTitle] = useState(false)
@@ -22,6 +23,7 @@ export const NoteTitle = (props: NoteTitleProps) => {
         value={props.value}
         size="small"
         label="Edit title"
+        onChange={props.onChange}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
