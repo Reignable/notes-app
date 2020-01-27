@@ -1,26 +1,23 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  OutlinedInput,
-  Typography,
-} from '@material-ui/core'
+import { Box, CircularProgress, Container, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Note } from '../../model/Note'
 import { notesService } from '../../services/NotesService'
 import { formatViewDate } from './formatDate'
 import { useDebounce } from '../../hooks/useDebounce'
+import { NoteTextArea } from './NoteTextArea/NoteTextArea'
+import { NoteTitle } from './NoteTitle/NoteTitle'
 
 export const NoteView = () => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
   const [noteBody, setNoteBody] = useState()
   const [loading, setLoading] = useState(false)
+
   const debouncedBody = useDebounce(noteBody, 500)
 
   useEffect(() => {
-    if (debouncedBody) {
+    if (debouncedBody && note) {
       notesService
         .updateNote(selectedNoteId, { ...note, body: debouncedBody })
         .then(data => {
@@ -46,23 +43,14 @@ export const NoteView = () => {
 
   return (
     <Container>
-      <Typography variant="caption" paragraph>
+      <Typography variant="caption">
         {note && `Last edited: ${formatViewDate(note.lastEdited)}`}
       </Typography>
-      <Box display="flex" justifyContent="space-between">
-        <Typography component="h2" variant="h4">
-          {note?.title}
-        </Typography>
+      <Box display="flex" justifyContent="space-between" mt={3} mb={3}>
+        <NoteTitle value={note?.title} />
         {loading && <CircularProgress size="1.5rem" />}
       </Box>
-      <OutlinedInput
-        onChange={handleTextAreaChange}
-        fullWidth
-        multiline
-        rowsMin={3}
-        rowsMax={50}
-        value={noteBody}
-      />
+      <NoteTextArea onChange={handleTextAreaChange} value={noteBody} />
     </Container>
   )
 }

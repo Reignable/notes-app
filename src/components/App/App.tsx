@@ -1,9 +1,11 @@
-import { Grid, Button, Box, Paper, Container } from '@material-ui/core'
+import { Grid, Box, Paper } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { notesService } from '../../services/NotesService'
 import { NotesList } from '../NotesList/NotesList'
 import { NoteView } from '../NoteView/NoteView'
+import NewNoteButton from '../NewNoteButton/NewNoteButton'
+import { Note } from '../../model/Note'
 
 const App = () => {
   const [notes, setNotes] = useState()
@@ -12,10 +14,8 @@ const App = () => {
     notesService.getNotes().then(response => setNotes(response))
   }, [])
 
-  const createNote = () => {
-    notesService.addNote().then(() => {
-      notesService.getNotes().then(response => setNotes(response))
-    })
+  const handleNoteAdded = (_newNote: Note) => {
+    notesService.getNotes().then(response => setNotes(response))
   }
 
   return (
@@ -31,14 +31,7 @@ const App = () => {
       >
         <Grid item xs={3}>
           <Box py={3}>
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              onClick={createNote}
-            >
-              New Note
-            </Button>
+            <NewNoteButton onNoteAdded={handleNoteAdded} />
           </Box>
           <Paper elevation={4}>
             <Route path="/" exact>
@@ -51,14 +44,11 @@ const App = () => {
         </Grid>
         <Grid item xs>
           <Route path="/:selectedNoteId">
-            <Container
-              component={Paper}
-              style={{ height: '100%', maxHeight: '100%' }}
-            >
+            <Paper style={{ height: '100%', maxHeight: '100%' }}>
               <Box py={3}>
                 <NoteView />
               </Box>
-            </Container>
+            </Paper>
           </Route>
         </Grid>
       </Grid>
