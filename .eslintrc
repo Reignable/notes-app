@@ -32,14 +32,14 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        // @todo change to 'error' once all code has been updated
         "@typescript-eslint/explicit-function-return-type": "warn",
-        // @todo change to 'error' once all code has been updated
         "@typescript-eslint/interface-name-prefix": "warn",
+        "@typescript-eslint/member-delimiter-style": "off",
         "@typescript-eslint/no-unused-vars": [
           "error",
           { "args": "all", "argsIgnorePattern": "^_" }
         ],
+        "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": [
           "error",
           {

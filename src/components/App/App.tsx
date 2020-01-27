@@ -1,26 +1,14 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react'
+import { notesService } from '../../services/NotesService'
 
 const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
+  const [notes, setNotes] = useState()
+
+  useEffect(() => {
+    notesService.getNotes().then(response => setNotes(response))
+  }, [])
+
+  return <div>{JSON.stringify(notes)}</div>
 }
 
 export default App
