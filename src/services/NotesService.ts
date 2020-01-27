@@ -13,6 +13,14 @@ class NotesService {
     const response = await axios.get(`${BASE_URL}/${id}`)
     return response.data
   }
+
+  public addNote = async (): Promise<Note> => {
+    const response = await axios.post<Note>(BASE_URL, {
+      title: 'New Note',
+      lastEdited: new Date(),
+    })
+    return response.data
+  }
 }
 
 export const notesService = new NotesService()

@@ -12,6 +12,12 @@ const App = () => {
     notesService.getNotes().then(response => setNotes(response))
   }, [])
 
+  const createNote = () => {
+    notesService.addNote().then(() => {
+      notesService.getNotes().then(response => setNotes(response))
+    })
+  }
+
   return (
     <Router>
       <Grid
@@ -25,7 +31,12 @@ const App = () => {
       >
         <Grid item xs={3}>
           <Box py={3}>
-            <Button fullWidth color="primary" variant="contained">
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              onClick={createNote}
+            >
               New Note
             </Button>
           </Box>
