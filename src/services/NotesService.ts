@@ -8,6 +8,11 @@ class NotesService {
     const response = await axios.get(BASE_URL)
     return response.data
   }
+
+  public getNote = async (id: string | number): Promise<Note> => {
+    const response = await axios.get(`${BASE_URL}/${id}`)
+    return response.data
+  }
 }
 
 export const notesService = new NotesService()

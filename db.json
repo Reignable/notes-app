@@ -1,6 +1,16 @@
 {
   "notes": [
-    { "id": 0, "title": "First note", "body": "this is the first note" },
-    { "id": 1, "title": "Second note", "body": "this is the second note" }
+    {
+      "id": "0",
+      "title": "First note",
+      "body": "this is the first note",
+      "lastEdited": "2020-01-27T18:32:48.309Z"
+    },
+    {
+      "id": "1",
+      "title": "Second note",
+      "body": "this is the second note",
+      "lastEdited": "2020-01-27T18:32:48.309Z"
+    }
   ]
 }
