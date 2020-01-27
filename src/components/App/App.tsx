@@ -1,4 +1,4 @@
-import { Grid, Button, Box } from '@material-ui/core'
+import { Grid, Button, Box, Paper, Container } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { notesService } from '../../services/NotesService'
@@ -14,23 +14,40 @@ const App = () => {
 
   return (
     <Router>
-      <Grid container>
+      <Grid
+        container
+        spacing={3}
+        style={{
+          height: '99vh',
+          maxHeight: '99vh',
+          backgroundColor: '#F5F5F5',
+        }}
+      >
         <Grid item xs={3}>
           <Box py={3}>
             <Button fullWidth color="primary" variant="contained">
               New Note
             </Button>
           </Box>
-          <Route path="/" exact>
-            <NotesList notes={notes} />
-          </Route>
-          <Route path="/:selectedNoteId">
-            <NotesList notes={notes} />
-          </Route>
+          <Paper elevation={4}>
+            <Route path="/" exact>
+              <NotesList notes={notes} />
+            </Route>
+            <Route path="/:selectedNoteId">
+              <NotesList notes={notes} />
+            </Route>
+          </Paper>
         </Grid>
         <Grid item xs>
           <Route path="/:selectedNoteId">
-            <NoteView />
+            <Container
+              component={Paper}
+              style={{ height: '100%', maxHeight: '100%' }}
+            >
+              <Box py={3}>
+                <NoteView />
+              </Box>
+            </Container>
           </Route>
         </Grid>
       </Grid>
