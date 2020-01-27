@@ -1,0 +1,6 @@
+{
+  "notes": [
+    { "id": 0, "title": "First note", "body": "this is the first note" },
+    { "id": 1, "title": "Second note", "body": "this is the second note" }
+  ]
+}
