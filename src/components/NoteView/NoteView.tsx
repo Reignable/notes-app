@@ -1,4 +1,10 @@
-import { Container, Typography, OutlinedInput } from '@material-ui/core'
+import {
+  Container,
+  Typography,
+  OutlinedInput,
+  CircularProgress,
+  Box,
+} from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Note } from '../../model/Note'
@@ -8,7 +14,7 @@ import { formatViewDate } from './formatDate'
 export const NoteView = () => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
-  const [noteBody, setNoteBody] = useState()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     notesService.getNote(selectedNoteId).then(data => {
@@ -16,21 +22,17 @@ export const NoteView = () => {
     })
   }, [selectedNoteId])
 
-  useEffect(() => {
-    setNoteBody(note?.body || '')
-  }, [note])
-
   const handleTextAreaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
+    setLoading(true)
     const {
       target: { value },
     } = event
-    setNoteBody(value)
     notesService
       .updateNote(selectedNoteId, { ...note, body: value })
       .then(data => setNote(data))
-      .finally(() => console.log('UPDATED', selectedNoteId))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -38,16 +40,19 @@ export const NoteView = () => {
       <Typography variant="caption" paragraph>
         {note && `Last edited: ${formatViewDate(note.lastEdited)}`}
       </Typography>
-      <Typography component="h2" variant="h4">
-        {note?.title}
-      </Typography>
+      <Box display="flex" justifyContent="space-between">
+        <Typography component="h2" variant="h4">
+          {note?.title}
+        </Typography>
+        {loading && <CircularProgress size="1.5rem" />}
+      </Box>
       <OutlinedInput
         onChange={handleTextAreaChange}
         fullWidth
         multiline
         rowsMin={3}
         rowsMax={50}
-        value={noteBody}
+        value={note?.body}
       />
     </Container>
   )

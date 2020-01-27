@@ -1,34 +1,16 @@
 {
   "notes": [
     {
-      "id": "0",
-      "title": "First note",
-      "body": "NOTES!!!",
-      "lastEdited": "2020-01-27T21:33:36.425Z"
-    },
-    {
-      "id": "1",
-      "title": "Second note",
-      "body": "this is the second note",
-      "lastEdited": "2020-01-27T21:30:52.573Z"
-    },
-    {
-      "id": "1234",
-      "title": "ID test",
-      "body": "Can I use any id? ",
-      "lastEdited": "2020-01-27T21:33:12.600Z"
+      "title": "New Note",
+      "lastEdited": "2020-01-27T21:48:49.225Z",
+      "id": 1,
+      "body": "Note one"
     },
     {
       "title": "New Note",
-      "lastEdited": "2020-01-27T21:29:47.528Z",
-      "id": "GKXspMV",
-      "body": "Hello there"
-    },
-    {
-      "title": "New Note",
-      "lastEdited": "2020-01-27T21:33:49.553Z",
-      "id": "UN7qoYl",
-      "body": "I'm A NEW NOTE!!@"
+      "lastEdited": "2020-01-27T21:48:54.025Z",
+      "id": 2,
+      "body": "Note two"
     }
   ]
 }
