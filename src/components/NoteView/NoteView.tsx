@@ -8,12 +8,12 @@ import { formatViewDate } from './formatDate'
 export const NoteView = () => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
-  const [noteBody, setNoteBody] = useState(note?.body)
+  const [noteBody, setNoteBody] = useState()
 
   useEffect(() => {
     notesService.getNote(selectedNoteId).then(data => {
       setNote(data)
-      setNoteBody(data.body)
+      setNoteBody(data.body || '')
     })
   }, [selectedNoteId])
 
