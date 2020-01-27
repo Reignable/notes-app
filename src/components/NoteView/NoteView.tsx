@@ -25,10 +25,12 @@ export const NoteView = () => {
 
   return (
     <Container>
-      <Typography variant="caption">
+      <Typography variant="caption" paragraph>
         {note && `Last edited: ${formatViewDate(note.lastEdited)}`}
       </Typography>
-      <Typography variant="h4">{note?.title}</Typography>
+      <Typography component="h2" variant="h4">
+        {note?.title}
+      </Typography>
       <OutlinedInput
         onChange={handleTextAreaChange}
         fullWidth

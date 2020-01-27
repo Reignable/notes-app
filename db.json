@@ -11,6 +11,12 @@
       "title": "Second note",
       "body": "this is the second note",
       "lastEdited": "2020-01-27T18:32:48.309Z"
+    },
+    {
+      "id": "1234",
+      "title": "ID test",
+      "body": "Can I use any id?",
+      "lastEdited": "2020-01-27T18:32:48.309Z"
     }
   ]
 }

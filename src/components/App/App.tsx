@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Button, Box } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { notesService } from '../../services/NotesService'
@@ -16,6 +16,11 @@ const App = () => {
     <Router>
       <Grid container>
         <Grid item xs={3}>
+          <Box py={3}>
+            <Button fullWidth color="primary" variant="contained">
+              New Note
+            </Button>
+          </Box>
           <Route path="/" exact>
             <NotesList notes={notes} />
           </Route>
