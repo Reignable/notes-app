@@ -6,9 +6,13 @@ interface NoteTextAreaProps {
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const NoteTextArea = ({ value = '', onChange }: NoteTextAreaProps) => {
+export const NoteTextArea = React.forwardRef<
+  HTMLTextAreaElement,
+  NoteTextAreaProps
+>(({ value = '', onChange }: NoteTextAreaProps, ref) => {
   return (
     <OutlinedInput
+      inputRef={ref}
       onChange={onChange}
       fullWidth
       multiline
@@ -18,4 +22,4 @@ export const NoteTextArea = ({ value = '', onChange }: NoteTextAreaProps) => {
       value={value}
     />
   )
-}
+})

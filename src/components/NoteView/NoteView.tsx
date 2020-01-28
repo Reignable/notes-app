@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { Note } from '../../model/Note'
 import { notesService } from '../../services/NotesService'
@@ -14,8 +14,10 @@ interface NoteViewProps {
 export const NoteView = (props: NoteViewProps) => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
+    if (textAreaRef.current) textAreaRef.current.focus()
     notesService.getNote(selectedNoteId).then(data => {
       setNote(data)
     })
@@ -50,7 +52,11 @@ export const NoteView = (props: NoteViewProps) => {
       <Box display="flex" justifyContent="space-between" mt={3} mb={3}>
         <NoteTitle value={note?.title || ''} onConfirm={handleTitleChange} />
       </Box>
-      <NoteTextArea onChange={handleTextAreaChange} value={note?.body} />
+      <NoteTextArea
+        onChange={handleTextAreaChange}
+        value={note?.body}
+        ref={textAreaRef}
+      />
     </Container>
   )
 }
