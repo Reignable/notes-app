@@ -21,6 +21,14 @@ class NotesService {
     })
     return response.data
   }
+
+  public updateNote = async (note: Note): Promise<Note> => {
+    const response = await axios.put<Note>(`${BASE_URL}/${note.id}`, {
+      ...note,
+      lastEdited: new Date(),
+    })
+    return response.data
+  }
 }
 
 export const notesService = new NotesService()

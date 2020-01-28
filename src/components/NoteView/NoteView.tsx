@@ -1,44 +1,56 @@
-import { Container, Typography, OutlinedInput } from '@material-ui/core'
+import { Box, Container, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Note } from '../../model/Note'
 import { notesService } from '../../services/NotesService'
 import { formatViewDate } from './formatDate'
+import { NoteTextArea } from './NoteTextArea/NoteTextArea'
+import { NoteTitle } from './NoteTitle/NoteTitle'
 
-export const NoteView = () => {
+interface NoteViewProps {
+  onConfirmTitle: () => void
+}
+
+export const NoteView = (props: NoteViewProps) => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
-  const [noteBody, setNoteBody] = useState()
 
   useEffect(() => {
     notesService.getNote(selectedNoteId).then(data => {
       setNote(data)
-      setNoteBody(data.body || '')
     })
   }, [selectedNoteId])
+
+  const handleChange = (newData: { title?: string; body?: string }) => {
+    if (note) {
+      notesService
+        .updateNote({ ...note, ...newData })
+        .then(response => setNote(response))
+        .finally(() => {
+          if (newData.title) props.onConfirmTitle()
+        })
+    }
+  }
 
   const handleTextAreaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setNoteBody(event.target.value)
+    handleChange({ body: event.target.value })
+  }
+
+  const handleTitleChange = (title: string) => {
+    handleChange({ title })
   }
 
   return (
     <Container>
-      <Typography variant="caption" paragraph>
+      <Typography variant="caption">
         {note && `Last edited: ${formatViewDate(note.lastEdited)}`}
       </Typography>
-      <Typography component="h2" variant="h4">
-        {note?.title}
-      </Typography>
-      <OutlinedInput
-        onChange={handleTextAreaChange}
-        fullWidth
-        multiline
-        rowsMin={3}
-        rowsMax={50}
-        value={noteBody}
-      />
+      <Box display="flex" justifyContent="space-between" mt={3} mb={3}>
+        <NoteTitle value={note?.title || ''} onConfirm={handleTitleChange} />
+      </Box>
+      <NoteTextArea onChange={handleTextAreaChange} value={note?.body} />
     </Container>
   )
 }
