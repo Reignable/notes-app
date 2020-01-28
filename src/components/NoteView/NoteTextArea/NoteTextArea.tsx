@@ -14,7 +14,7 @@ export const NoteTextArea = ({ value = '', onChange }: NoteTextAreaProps) => {
       multiline
       rowsMin={3}
       rows={5}
-      rowsMax={50}
+      rowsMax={35}
       value={value}
     />
   )

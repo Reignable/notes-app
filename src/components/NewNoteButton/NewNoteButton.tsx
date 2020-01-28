@@ -5,6 +5,7 @@ import { Note } from '../../model/Note'
 import { notesService } from '../../services/NotesService'
 
 interface NewNoteButtonProps extends RouteComponentProps {
+  fullWidth?: boolean
   onNoteAdded: (newNote: Note) => void
 }
 
@@ -17,7 +18,12 @@ const NewNoteButton = (props: NewNoteButtonProps) => {
   }
 
   return (
-    <Button fullWidth color="primary" variant="contained" onClick={createNote}>
+    <Button
+      fullWidth={props.fullWidth}
+      color="primary"
+      variant="contained"
+      onClick={createNote}
+    >
       New Note
     </Button>
   )
