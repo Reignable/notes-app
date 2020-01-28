@@ -5,18 +5,17 @@ import { notesService } from '../../services/NotesService'
 import { NotesList } from '../NotesList/NotesList'
 import { NoteView } from '../NoteView/NoteView'
 import NewNoteButton from '../NewNoteButton/NewNoteButton'
-import { Note } from '../../model/Note'
 
 const App = () => {
   const [notes, setNotes] = useState()
 
-  useEffect(() => {
-    notesService.getNotes().then(response => setNotes(response))
-  }, [])
-
-  const handleNoteAdded = (_newNote: Note) => {
+  const updateNotes = () => {
     notesService.getNotes().then(response => setNotes(response))
   }
+
+  useEffect(() => {
+    updateNotes()
+  }, [])
 
   return (
     <Router>
@@ -31,7 +30,7 @@ const App = () => {
       >
         <Grid item xs={3}>
           <Box py={3}>
-            <NewNoteButton onNoteAdded={handleNoteAdded} />
+            <NewNoteButton onNoteAdded={updateNotes} />
           </Box>
           <Paper elevation={4}>
             <Route path="/" exact>
@@ -46,7 +45,7 @@ const App = () => {
           <Route path="/:selectedNoteId">
             <Paper style={{ height: '100%', maxHeight: '100%' }}>
               <Box py={3}>
-                <NoteView />
+                <NoteView onConfirmTitle={updateNotes} />
               </Box>
             </Paper>
           </Route>

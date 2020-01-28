@@ -7,7 +7,11 @@ import { formatViewDate } from './formatDate'
 import { NoteTextArea } from './NoteTextArea/NoteTextArea'
 import { NoteTitle } from './NoteTitle/NoteTitle'
 
-export const NoteView = () => {
+interface NoteViewProps {
+  onConfirmTitle: () => void
+}
+
+export const NoteView = (props: NoteViewProps) => {
   const { selectedNoteId } = useParams<{ selectedNoteId: string | undefined }>()
   const [note, setNote] = useState<Note>()
 
@@ -22,6 +26,9 @@ export const NoteView = () => {
       notesService
         .updateNote({ ...note, ...newData })
         .then(response => setNote(response))
+        .finally(() => {
+          if (newData.title) props.onConfirmTitle()
+        })
     }
   }
 
@@ -31,8 +38,8 @@ export const NoteView = () => {
     handleChange({ body: event.target.value })
   }
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange({ title: event.target.value })
+  const handleTitleChange = (title: string) => {
+    handleChange({ title })
   }
 
   return (
@@ -41,7 +48,7 @@ export const NoteView = () => {
         {note && `Last edited: ${formatViewDate(note.lastEdited)}`}
       </Typography>
       <Box display="flex" justifyContent="space-between" mt={3} mb={3}>
-        <NoteTitle value={note?.title} onChange={handleTitleChange} />
+        <NoteTitle value={note?.title || ''} onConfirm={handleTitleChange} />
       </Box>
       <NoteTextArea onChange={handleTextAreaChange} value={note?.body} />
     </Container>

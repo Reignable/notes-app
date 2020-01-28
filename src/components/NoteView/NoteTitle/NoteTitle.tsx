@@ -6,28 +6,38 @@ import {
 } from '@material-ui/core'
 import CheckIcon from '@material-ui/icons/Check'
 import EditIcon from '@material-ui/icons/Edit'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 interface NoteTitleProps {
-  value?: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  value: string
+  onConfirm: (newTitle: string) => void
 }
 export const NoteTitle = (props: NoteTitleProps) => {
   const [hoveringTitle, setHoveringTitle] = useState(false)
   const [editingTitle, setEditingTitle] = useState(false)
+  const [newTitle, setNewTitle] = useState(props.value)
+
+  useEffect(() => {
+    setNewTitle(props.value)
+  }, [props.value])
+
+  const handleConfirm = () => {
+    setEditingTitle(false)
+    props.onConfirm(newTitle)
+  }
 
   if (editingTitle) {
     return (
       <TextField
         variant="outlined"
-        value={props.value}
+        value={newTitle}
         size="small"
         label="Edit title"
-        onChange={props.onChange}
+        onChange={e => setNewTitle(e.target.value)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={() => setEditingTitle(false)}>
+              <IconButton onClick={handleConfirm}>
                 <CheckIcon />
               </IconButton>
             </InputAdornment>
