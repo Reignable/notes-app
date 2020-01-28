@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { Note } from '../../model/Note'
 import { notesService } from '../../services/NotesService'
-import { formatViewDate } from './formatDate'
+import { formatViewDate } from './formatViewDate'
 import { NoteTextArea } from './NoteTextArea/NoteTextArea'
 import { NoteTitle } from './NoteTitle/NoteTitle'
 
