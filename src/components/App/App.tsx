@@ -2,7 +2,7 @@ import { Grid, Box, Paper } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { notesService } from '../../services/NotesService'
-import { NotesList } from '../NotesList/NotesList'
+import NotesList from '../NotesList/NotesList'
 import { NoteView } from '../NoteView/NoteView'
 import NewNoteButton from '../NewNoteButton/NewNoteButton'
 
@@ -34,10 +34,10 @@ const App = () => {
           </Box>
           <Paper elevation={4}>
             <Route path="/" exact>
-              <NotesList notes={notes} />
+              <NotesList notes={notes} onDeleteNote={updateNotes} />
             </Route>
             <Route path="/:selectedNoteId">
-              <NotesList notes={notes} />
+              <NotesList notes={notes} onDeleteNote={updateNotes} />
             </Route>
           </Paper>
         </Grid>

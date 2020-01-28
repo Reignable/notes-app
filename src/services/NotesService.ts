@@ -29,6 +29,11 @@ class NotesService {
     })
     return response.data
   }
+
+  public deleteNote = async (id: number | string): Promise<{}> => {
+    const response = await axios.delete<{}>(`${BASE_URL}/${id}`)
+    return response
+  }
 }
 
 export const notesService = new NotesService()
