@@ -1,9 +1,9 @@
 import { List } from '@material-ui/core'
 import React from 'react'
-import { useParams, RouteComponentProps, withRouter } from 'react-router-dom'
+import { RouteComponentProps, useParams, withRouter } from 'react-router-dom'
 import { Note } from '../../model/Note'
-import { NotesListItem } from './NotesListItem/NotesListItem'
 import { notesService } from '../../services/NotesService'
+import { NotesListItem } from './NotesListItem/NotesListItem'
 
 interface NotesListProps extends RouteComponentProps {
   notes: Note[]
@@ -22,8 +22,8 @@ export const NotesList = (props: NotesListProps) => {
     })
   }
 
-  return props.notes ? (
-    <List>
+  return (
+    <List style={{ maxHeight: '87vh', overflow: 'auto' }}>
       {props.notes.map(note => (
         <NotesListItem
           selected={`${note.id}` === selectedNoteId}
@@ -33,8 +33,6 @@ export const NotesList = (props: NotesListProps) => {
         />
       ))}
     </List>
-  ) : (
-    <div>No notes</div>
   )
 }
 

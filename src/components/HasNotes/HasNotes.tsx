@@ -16,12 +16,11 @@ export const HasNotes = (props: HasNotesProps) => (
     container
     spacing={3}
     style={{
-      height: '99vh',
-      maxHeight: '99vh',
-      backgroundColor: '#F5F5F5',
+      height: '99.6vh',
+      maxHeight: '99.6vh',
     }}
   >
-    <Grid item xs={3}>
+    <Grid item xs={12} sm={3}>
       <Box py={3}>
         <NewNoteButton fullWidth onNoteAdded={props.onNotesChange} />
       </Box>

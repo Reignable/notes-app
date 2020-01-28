@@ -1,16 +1,16 @@
 {
   "notes": [
     {
-      "title": "New Note",
-      "lastEdited": "2020-01-28T07:02:17.972Z",
-      "id": 1,
-      "body": "Note 1"
+      "title": "Example 1",
+      "lastEdited": "2020-01-28T08:37:20.961Z",
+      "id": 2,
+      "body": "This is example note 1"
     },
     {
-      "title": "New Note",
-      "lastEdited": "2020-01-28T07:02:15.321Z",
-      "id": 2,
-      "body": "wfkjwfhjwf"
+      "title": "Example 2",
+      "lastEdited": "2020-01-28T08:37:34.621Z",
+      "id": 3,
+      "body": "This is example note 2"
     }
   ]
 }
