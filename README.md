@@ -13,3 +13,10 @@ Note pages have their own URL so they can be bookmarked. Their titles can be edi
    - `yarn`
 2. Run server and web app
    - `yarn start`
+
+### Test
+
+1. Install dependencies
+   - `yarn`
+2. Run the tests
+   - `yarn test`

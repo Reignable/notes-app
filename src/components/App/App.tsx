@@ -8,7 +8,10 @@ const App = () => {
   const [notes, setNotes] = useState()
 
   const updateNotes = () => {
-    notesService.getNotes().then(response => setNotes(response))
+    notesService
+      .getNotes()
+      .then(response => setNotes(response))
+      .catch(() => console.error('Could not retrieve notes'))
   }
 
   useEffect(() => {
