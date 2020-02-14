@@ -1,34 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { notesService } from '../../services/NotesService'
-import { HasNotes } from '../HasNotes/HasNotes'
-import { NoNotes } from '../NoNotes/NoNotes'
+import React from 'react'
+import { NotesProvider } from 'state/notes/NotesProvider'
+import { Deeper } from 'components/Deeper/Deeper'
+import { AddNote } from 'components/AddNote'
+import { DeleteNote } from 'components/DeleteNote'
 
-const App = () => {
-  const [notes, setNotes] = useState()
-
-  const updateNotes = () => {
-    notesService
-      .getNotes()
-      .then(response => setNotes(response))
-      .catch(() => console.error('Could not retrieve notes'))
-  }
-
-  useEffect(() => {
-    updateNotes()
-  }, [])
-
-  return (
-    <Router>
-      {notes === undefined || notes.length === 0 ? (
-        <Route>
-          <NoNotes onNoteAdded={updateNotes} />
-        </Route>
-      ) : (
-        <HasNotes notes={notes} onNotesChange={updateNotes} />
-      )}
-    </Router>
-  )
-}
-
-export default App
+export const App = () => (
+  <NotesProvider>
+    <Deeper />
+    <AddNote />
+    <DeleteNote />
+  </NotesProvider>
+)

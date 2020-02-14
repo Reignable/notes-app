@@ -1,16 +1,24 @@
 {
   "notes": [
     {
-      "title": "Example 1",
-      "lastEdited": "2020-01-28T08:37:20.961Z",
-      "id": 2,
-      "body": "This is example note 1"
+      "title": "New Note",
+      "lastEdited": "2020-02-14T17:55:19.126Z",
+      "id": 1
     },
     {
-      "title": "Example 2",
-      "lastEdited": "2020-01-28T08:37:34.621Z",
-      "id": 3,
-      "body": "This is example note 2"
+      "title": "New Note",
+      "lastEdited": "2020-02-14T17:55:20.075Z",
+      "id": 2
+    },
+    {
+      "title": "New Note",
+      "lastEdited": "2020-02-14T17:55:20.796Z",
+      "id": 3
+    },
+    {
+      "title": "New Note",
+      "lastEdited": "2020-02-14T17:55:21.680Z",
+      "id": 4
     }
   ]
 }
