@@ -1,4 +1,8 @@
-import React from 'react'
-import { TypographyProps } from './TypographyProps'
+import styled from 'styled-components'
 
-export const H1 = ({ children }: TypographyProps) => <h1>{children}</h1>
+export const H1 = styled.h1`
+  font-family: Source Serif Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 96px;
+`
