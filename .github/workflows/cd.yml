@@ -1,9 +1,6 @@
 name: End to End Tests
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   # Deploy to staging
