@@ -13,9 +13,9 @@ describe('notes reducer', () => {
 
 describe('addNote', () => {
   it('should give each note incrementing ids', () => {
-    const state1 = notes([], addNote({}))
+    const state1 = notes([], addNote())
     expect(state1[0].id).toEqual(0)
-    const state2 = notes(state1, addNote({}))
+    const state2 = notes(state1, addNote())
     expect(state2[1].id).toEqual(1)
   })
 })

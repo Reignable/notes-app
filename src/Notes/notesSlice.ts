@@ -9,9 +9,8 @@ const notesSlice = createSlice({
   name: 'notes',
   initialState: [] as Notes,
   reducers: {
-    addNote(state, _action): void {
-      state.push({ title: '', body: '', id: nextNoteId })
-      nextNoteId++
+    addNote: (state): void => {
+      state.push({ id: nextNoteId++, title: '', body: '' })
     },
   },
 })
