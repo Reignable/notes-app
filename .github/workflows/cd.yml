@@ -24,7 +24,7 @@ jobs:
       - name: Run Cypress
         uses: cypress-io/github-action@v1
         with:
-          env: CYPRESS_BASE_URL=${{secrets.HEROKU_APP_STAGING_URL}}
+          env: CYPRESS_BASE_URL=https://reignable-notes-app-staging.herokuapp.com
   # If tests pass, promote staging to prod
   deploy-prod:
     runs-on: ubuntu-latest
