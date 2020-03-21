@@ -3,7 +3,8 @@
     "es6": true,
     "node": true,
     "browser": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "settings": {
     "import/resolver": {
@@ -16,10 +17,11 @@
     }
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint", "cypress", "prettier"],
   "extends": [
     "airbnb",
     "plugin:prettier/recommended",
+    "plugin:cypress/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
