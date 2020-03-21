@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 let nextNoteId = 0
 
-type Note = { id: number; title: string; body: string }
-type Notes = Note[]
+export type Note = { id: number; title: string; body: string }
+export type Notes = Note[]
 
 const notesSlice = createSlice({
   name: 'notes',
