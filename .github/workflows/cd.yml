@@ -1,6 +1,9 @@
 name: CD
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   # Deploy to staging
@@ -26,13 +29,15 @@ jobs:
         uses: cypress-io/github-action@v1
         env:
           CYPRESS_BASE_URL: ${{secrets.HEROKU_APP_STAGING_URL}}
-      - uses: actions/upload-artifact@v1
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: always()
+      - name: Upload videos
+        uses: actions/upload-artifact@v1
+        if: failure()
         with:
           name: cypress-videos
           path: cypress/videos
