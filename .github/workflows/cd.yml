@@ -13,7 +13,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_STAGING}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          buildpack: mars/create-react-app
   # Run E2E tests
   e2e:
     runs-on: ubuntu-latest
