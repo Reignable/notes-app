@@ -1,5 +1,6 @@
 describe('first test', () => {
   it("doesn't do much", () => {
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
+    cy.get('[data-testid=app-root]').contains('Hi')
   })
 })

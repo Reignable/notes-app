@@ -10,6 +10,6 @@ describe('App', () => {
 
   it('Should say hello', () => {
     const { getByTestId } = render(<App />)
-    expect(getByTestId('app-root')).toHaveTextContent('Hello')
+    expect(getByTestId('app-root')).toHaveTextContent('Hi')
   })
 })
