@@ -10,7 +10,11 @@ type NotesListItemProps = Note
 
 export const NotesListItem = (props: NotesListItemProps) => (
   <li data-testid={`${TEST_ID_NOTES_LIST_ITEM}-${props.id}`}>
-    <p data-testid={TEST_ID_NOTES_LIST_ITEM_TITLE}>{props.title}</p>
-    <p data-testid={TEST_ID_NOTES_LIST_ITEM_BODY}>{props.body}</p>
+    <p data-testid={`${TEST_ID_NOTES_LIST_ITEM_TITLE}-${props.id}`}>
+      {props.title}
+    </p>
+    <p data-testid={`${TEST_ID_NOTES_LIST_ITEM_BODY}-${props.id}`}>
+      {props.body}
+    </p>
   </li>
 )

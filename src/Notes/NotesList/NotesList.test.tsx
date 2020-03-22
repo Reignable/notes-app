@@ -9,13 +9,13 @@ describe('NotesList', () => {
     expect(getByRole('listitem')).toBeInTheDocument()
   })
 
-  it('should render all notes', () => {
+  it('should render all notes in the notes array', () => {
     const notes = [
       { id: 0, title: 'note 1', body: 'this is note 1 body' },
       { id: 1, title: 'note 2', body: 'this is note 2 body' },
     ]
-    const { getAllByRole } = render(<NotesList notes={notes} />)
-    const items = getAllByRole('listitem')
+    const { getAllByTestId } = render(<NotesList notes={notes} />)
+    const items = getAllByTestId(/notes-list-item-\d*$/)
     expect(items).toHaveLength(notes.length)
   })
 })
