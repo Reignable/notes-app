@@ -3,10 +3,10 @@ import { NotesList } from 'Notes/NotesList'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { TEST_ID_NOTES_VIEW } from 'testIdentifiers'
-import { selectNotes } from './notesSlice'
+import { selectNotesList } from './notesSlice'
 
 export const NotesView = () => {
-  const notes = useSelector(selectNotes)
+  const notes = useSelector(selectNotesList)
 
   return (
     <div data-testid={TEST_ID_NOTES_VIEW}>

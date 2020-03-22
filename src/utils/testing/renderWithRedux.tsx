@@ -6,7 +6,7 @@ import reducer, { RootState } from 'rootReducer'
 
 export const renderWithRedux = (
   ui: React.ReactNode,
-  initialState = { notes: [] } as RootState,
+  initialState = { notes: { list: [] } } as RootState,
 ) => {
   const store = configureStore({ reducer, preloadedState: initialState })
   return {
