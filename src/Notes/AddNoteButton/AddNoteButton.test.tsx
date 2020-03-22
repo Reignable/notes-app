@@ -13,6 +13,6 @@ describe('AddNoteButton', () => {
   it('should add a note to the store on click', () => {
     const { getByTestId, store } = renderWithRedux(<AddNoteButton />)
     userEvent.click(getByTestId(TEST_ID_ADD_NOTE_BUTTON))
-    expect(store.getState().notes).toHaveLength(1)
+    expect(store.getState().notes.list).toHaveLength(1)
   })
 })

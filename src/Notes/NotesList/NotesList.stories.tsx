@@ -4,11 +4,11 @@ import { NotesList } from './NotesList'
 
 const notes: Notes = [
   { id: 0, title: 'Note 1', body: 'Note 1 body' },
-  { id: 2, title: 'Note 2', body: 'Note 2 body' },
+  { id: 1, title: 'Note 2', body: 'Note 2 body' },
 ]
 
-export default { title: 'Notes' }
+export default { title: 'Notes/Notes List' }
 
-export const Story = () => <NotesList notes={notes} />
+export const WithNotes = () => <NotesList notes={notes} />
 
-Story.story = { name: 'Notes List' }
+export const WithSelected = () => <NotesList notes={notes} selectedNote={1} />
