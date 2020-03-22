@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotesListItem should render text bold if selected 1`] = `
+<li
+  data-testid="notes-list-item-0"
+  role="menuitem"
+  style="font-weight: bolder;"
+>
+  <p
+    data-testid="notes-list-item-title-0"
+  >
+    test-title
+  </p>
+  <p
+    data-testid="notes-list-item-body-0"
+  >
+    test body
+  </p>
+</li>
+`;
+
+exports[`NotesListItem should render text bold if selected: 
+      <li
+        data-testid="notes-list-item-0"
+        role="menuitem"
+        style="font-weight: bolder;"
+      >
+        <p
+          data-testid="notes-list-item-title-0"
+        >
+          test-title
+        </p>
+        <p
+          data-testid="notes-list-item-body-0"
+        >
+          test body
+        </p>
+      </li>
+     1`] = `
+<li
+  data-testid="notes-list-item-0"
+  role="menuitem"
+  style="font-weight: bolder;"
+>
+  <p
+    data-testid="notes-list-item-title-0"
+  >
+    test-title
+  </p>
+  <p
+    data-testid="notes-list-item-body-0"
+  >
+    test body
+  </p>
+</li>
+`;

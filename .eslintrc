@@ -65,7 +65,8 @@
           "error",
           { "accessibility": "explicit" }
         ],
-        "@typescript-eslint/no-parameter-properties": "off"
+        "@typescript-eslint/no-parameter-properties": "off",
+        "no-param-reassign": "off"
       }
     },
     {

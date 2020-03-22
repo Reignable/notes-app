@@ -1,5 +1,10 @@
 import { RootState } from 'rootReducer'
-import notes, { addNote, selectNotesList } from './notesSlice'
+import notes, {
+  addNote,
+  selectNote,
+  selectNotesList,
+  selectSelectedNote,
+} from './notesSlice'
 
 describe('notes slice', () => {
   describe('reducer', () => {
@@ -23,10 +28,24 @@ describe('notes slice', () => {
         expect(state2.list[1].id).toEqual(state2.list[0].id + 1)
       })
     })
+    describe('selectNote', () => {
+      it('should set selected note to the provided id', () => {
+        const initialState = { list: [{ id: 0, body: 'test', title: 'Test' }] }
+        const noteId = 0
+        const result = notes(initialState, selectNote(noteId))
+        expect(result.selected).toEqual(noteId)
+      })
+
+      it('should should only select the note if it exists', () => {
+        const noteId = 0
+        const result = notes({ list: [] }, selectNote(noteId))
+        expect(result.selected).not.toEqual(noteId)
+      })
+    })
   })
 
   describe('selectors', () => {
-    describe('selectNotes', () => {
+    describe('selectNotesList', () => {
       it('should return the notes array from root state', () => {
         const initialState: RootState = {
           notes: {
@@ -35,6 +54,29 @@ describe('notes slice', () => {
         }
         const result = selectNotesList(initialState)
         expect(result).toEqual(initialState.notes.list)
+      })
+    })
+
+    describe('selectSelectedNote', () => {
+      it('should return undefined if no note is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+          },
+        }
+        const result = selectSelectedNote(initialState)
+        expect(result).toEqual(undefined)
+      })
+
+      it('should return the id of the selected note if one is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+            selected: 0,
+          },
+        }
+        const result = selectSelectedNote(initialState)
+        expect(result).toEqual(initialState.notes.selected)
       })
     })
   })

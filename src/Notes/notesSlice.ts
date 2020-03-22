@@ -1,4 +1,9 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  createSelector,
+  PayloadAction,
+  PrepareAction,
+} from '@reduxjs/toolkit'
 import { RootState } from 'rootReducer'
 
 let nextNoteId = 0
@@ -22,11 +27,24 @@ const notesSlice = createSlice({
         body: `Note ${nextNoteId} body`,
       })
     },
+    selectNote: {
+      prepare: (id: number): ReturnType<PrepareAction<{ id: number }>> => ({
+        payload: { id },
+      }),
+      reducer: (state, action: PayloadAction<{ id: number }>): void => {
+        const { id } = action.payload
+        if (state.list.some(note => note.id === id)) state.selected = id
+      },
+    },
   },
 })
 
 const baseSelector = (state: RootState): NotesState => state.notes
-export const selectNotesList = createSelector(baseSelector, notes => notes.list)
+export const selectNotesList = createSelector(baseSelector, state => state.list)
+export const selectSelectedNote = createSelector(
+  baseSelector,
+  state => state.selected,
+)
 
-export const { addNote } = notesSlice.actions
+export const { addNote, selectNote } = notesSlice.actions
 export default notesSlice.reducer
