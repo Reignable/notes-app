@@ -1,15 +1,10 @@
-import React from 'react'
-import { render } from '@testing-library/react'
 import { App } from 'App'
+import React from 'react'
+import { renderWithRedux } from 'utils/testing/renderWithRedux'
 
 describe('App', () => {
   it('should have a root element', () => {
-    const { getByTestId } = render(<App />)
+    const { getByTestId } = renderWithRedux(<App />)
     expect(getByTestId('app-root')).toBeInTheDocument()
-  })
-
-  it('Should say hello', () => {
-    const { getByTestId } = render(<App />)
-    expect(getByTestId('app-root')).toHaveTextContent('Hi')
   })
 })
