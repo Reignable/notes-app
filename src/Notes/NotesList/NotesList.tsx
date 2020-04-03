@@ -1,4 +1,4 @@
-import { Notes } from 'Notes/notesSlice'
+import { Notes, Note } from 'Notes/notesSlice'
 import React from 'react'
 import { TEST_ID_NOTES_LIST } from 'testIdentifiers'
 import { NotesListItem } from './NotesListItem/NotesListItem'
@@ -6,6 +6,7 @@ import { NotesListItem } from './NotesListItem/NotesListItem'
 type NotesListProps = {
   notes: Notes
   selectedNote?: number
+  onSelect?(id: Note['id']): void
 }
 
 export const NotesList = (props: NotesListProps) => (
@@ -14,6 +15,7 @@ export const NotesList = (props: NotesListProps) => (
       <NotesListItem
         key={note.id}
         selected={props.selectedNote === note.id}
+        onSelect={props.onSelect}
         {...note}
       />
     ))}

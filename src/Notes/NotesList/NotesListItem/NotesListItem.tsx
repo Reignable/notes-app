@@ -1,19 +1,19 @@
-import { Note, selectNote } from 'Notes/notesSlice'
+import { Note } from 'Notes/notesSlice'
 import React from 'react'
 import {
   TEST_ID_NOTES_LIST_ITEM,
   TEST_ID_NOTES_LIST_ITEM_BODY,
   TEST_ID_NOTES_LIST_ITEM_TITLE,
 } from 'testIdentifiers'
-import { useDispatch } from 'react-redux'
 
-type NotesListItemProps = Note & { selected?: boolean }
+type NotesListItemProps = Note & {
+  selected?: boolean
+  onSelect?(id: Note['id']): void
+}
 
 export const NotesListItem = (props: NotesListItemProps) => {
-  const dispatch = useDispatch()
-
   const handleSelectNote = () => {
-    dispatch(selectNote(props.id))
+    if (props.onSelect) props.onSelect(props.id)
   }
 
   return (
