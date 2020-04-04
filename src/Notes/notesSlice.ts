@@ -83,8 +83,8 @@ const notesSlice = createSlice({
         const note = state.list.find(n => n.id === id)
         if (note) {
           const index = state.list.indexOf(note)
-          if (title) state.list[index].title = title
-          if (body) state.list[index].body = body
+          if (title !== undefined) state.list[index].title = title
+          if (body !== undefined) state.list[index].body = body
         }
       },
     },

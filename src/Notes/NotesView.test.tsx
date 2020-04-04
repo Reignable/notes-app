@@ -1,3 +1,4 @@
+import { wait } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import {
@@ -62,10 +63,7 @@ describe('NotesView', () => {
   it('should not render the editor if no note is selected', () => {
     const initialState = {
       notes: {
-        list: [
-          { id: 0, body: 'Note 0 body', title: 'Note 0 title' },
-          { id: 1, body: 'Note 1 body', title: 'Note 1 title' },
-        ],
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
       },
     }
     const { queryByTestId } = renderWithRedux(<NotesView />, initialState)
@@ -75,14 +73,67 @@ describe('NotesView', () => {
   it('should render the editor if a note is selected', () => {
     const initialState = {
       notes: {
-        list: [
-          { id: 0, body: 'Note 0 body', title: 'Note 0 title' },
-          { id: 1, body: 'Note 1 body', title: 'Note 1 title' },
-        ],
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
         selected: 0,
       },
     }
     const { getByTestId } = renderWithRedux(<NotesView />, initialState)
     expect(getByTestId(TEST_ID_NOTE_EDITOR)).toBeInTheDocument()
+  })
+
+  it('should set the editor into edit mode when the edit button is clicked', () => {
+    const initialState = {
+      notes: {
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
+        selected: 0,
+      },
+    }
+    const { getByText, getByLabelText } = renderWithRedux(
+      <NotesView />,
+      initialState,
+    )
+    userEvent.click(getByText('Edit'))
+    expect(getByLabelText('Title')).toBeInTheDocument()
+  })
+
+  it('should set the editor into view mode when the view button is clicked', () => {
+    const initialState = {
+      notes: {
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
+        selected: 0,
+      },
+    }
+    const { getByText, getByLabelText, queryByLabelText } = renderWithRedux(
+      <NotesView />,
+      initialState,
+    )
+    userEvent.click(getByText('Edit'))
+    expect(getByLabelText('Title')).toBeInTheDocument()
+    userEvent.click(getByText('View'))
+    expect(queryByLabelText('Title')).not.toBeInTheDocument()
+  })
+
+  it('should update a note title when the title input is changed', async () => {
+    const initialState = {
+      notes: {
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
+        selected: 0,
+      },
+    }
+    const newTitle = 'New title'
+    const { getByText, getByLabelText, store } = renderWithRedux(
+      <NotesView />,
+      initialState,
+    )
+    userEvent.click(getByText('Edit'))
+    userEvent.type(getByLabelText('Title'), newTitle)
+    await wait(() => {
+      expect(
+        store
+          .getState()
+          .notes.list.find(({ id }) => id === initialState.notes.selected)
+          ?.title,
+      ).toBe(newTitle)
+    })
   })
 })

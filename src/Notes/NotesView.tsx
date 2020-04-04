@@ -1,6 +1,6 @@
 import { AddNoteButton } from 'Notes/AddNoteButton'
 import { NotesList } from 'Notes/NotesList'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TEST_ID_NOTES_VIEW } from 'testIdentifiers'
 import {
@@ -11,6 +11,7 @@ import {
   selectNotesList,
   selectSelectedNoteId,
   selectSelectedNote,
+  updateNote,
 } from './notesSlice'
 import { NoteEditor } from './NoteEditor/NoteEditor'
 
@@ -19,6 +20,7 @@ export const NotesView = () => {
   const notes = useSelector(selectNotesList)
   const selectedNoteId = useSelector(selectSelectedNoteId)
   const selectedNote = useSelector(selectSelectedNote)
+  const [editMode, setEditMode] = useState(false)
 
   const handleAddNote = () => {
     dispatch(addNote())
@@ -32,9 +34,24 @@ export const NotesView = () => {
     dispatch(deleteNote(id))
   }
 
+  const handleEditModeToggle = () => setEditMode(mode => !mode)
+
+  const handleEditorChange = (note: Partial<Omit<Note, 'id'>>) => {
+    if (selectedNoteId !== undefined) {
+      dispatch(updateNote(selectedNoteId, note))
+    }
+  }
+
   return (
     <div data-testid={TEST_ID_NOTES_VIEW}>
-      {selectedNote && <NoteEditor note={selectedNote} />}
+      {selectedNote && (
+        <NoteEditor
+          note={selectedNote}
+          editMode={editMode}
+          onEditModeToggle={handleEditModeToggle}
+          onChange={handleEditorChange}
+        />
+      )}
       <AddNoteButton onClick={handleAddNote} />
       <NotesList
         notes={notes}
