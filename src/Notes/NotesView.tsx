@@ -9,6 +9,7 @@ import {
   addNote,
   Note,
   selectNote,
+  deleteNote,
 } from './notesSlice'
 
 export const NotesView = () => {
@@ -16,7 +17,7 @@ export const NotesView = () => {
   const notes = useSelector(selectNotesList)
   const selectedNote = useSelector(selectSelectedNote)
 
-  const handleAddNoteClick = () => {
+  const handleAddNote = () => {
     dispatch(addNote())
   }
 
@@ -24,13 +25,18 @@ export const NotesView = () => {
     dispatch(selectNote(id))
   }
 
+  const handleDeleteNote = (id: Note['id']) => {
+    dispatch(deleteNote(id))
+  }
+
   return (
     <div data-testid={TEST_ID_NOTES_VIEW}>
-      <AddNoteButton onClick={handleAddNoteClick} />
+      <AddNoteButton onClick={handleAddNote} />
       <NotesList
         notes={notes}
         selectedNote={selectedNote}
         onSelect={handleSelectNote}
+        onDelete={handleDeleteNote}
       />
     </div>
   )

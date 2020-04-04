@@ -58,9 +58,10 @@ describe('notes slice', () => {
           list: [
             { id: 0, body: 'test', title: 'Test' },
             { id: 1, body: 'test', title: 'Test' },
+            { id: 2, body: 'test', title: 'Test' },
           ],
         }
-        const noteId = 1
+        const noteId = 0
         const result = notes(initialState, deleteNote(noteId))
         const expected = initialState.list.filter(note => note.id !== noteId)
         expect(result.list).toEqual(expected)

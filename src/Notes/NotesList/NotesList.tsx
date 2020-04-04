@@ -7,15 +7,17 @@ type NotesListProps = {
   notes: Notes
   selectedNote?: number
   onSelect?(id: Note['id']): void
+  onDelete?(id: Note['id']): void
 }
 
 export const NotesList = (props: NotesListProps) => (
-  <ul data-testid={TEST_ID_NOTES_LIST}>
+  <ul role="menu" data-testid={TEST_ID_NOTES_LIST}>
     {props.notes.map(note => (
       <NotesListItem
         key={note.id}
         selected={props.selectedNote === note.id}
         onSelect={props.onSelect}
+        onDelete={props.onDelete}
         {...note}
       />
     ))}

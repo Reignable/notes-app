@@ -54,7 +54,7 @@ const notesSlice = createSlice({
               state.selected = undefined
             }
           }
-          state.list.splice(index)
+          state.list.splice(index, 1)
         }
       },
     },

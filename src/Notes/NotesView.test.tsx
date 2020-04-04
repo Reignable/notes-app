@@ -38,4 +38,23 @@ describe('NotesView', () => {
     userEvent.click(getByText('Note title'))
     expect(store.getState().notes.selected).toBe(initialState.notes.list[0].id)
   })
+
+  it('should remove a note when the delete button is clicked', () => {
+    const initialState = {
+      notes: {
+        list: [
+          { id: 0, body: 'Note body', title: 'Note title' },
+          { id: 1, body: 'Note body', title: 'Note title' },
+        ],
+      },
+    }
+    const { getAllByText, getAllByRole } = renderWithRedux(
+      <NotesView />,
+      initialState,
+    )
+    userEvent.click(getAllByText('Delete')[0])
+    expect(getAllByRole('menuitem')).toHaveLength(
+      initialState.notes.list.length - 1,
+    )
+  })
 })
