@@ -14,8 +14,8 @@ describe('NotesList', () => {
       { id: 0, title: 'note 1', body: 'this is note 1 body' },
       { id: 1, title: 'note 2', body: 'this is note 2 body' },
     ]
-    const { getAllByTestId } = render(<NotesList notes={notes} />)
-    const items = getAllByTestId(/notes-list-item-\d*$/)
+    const { getAllByRole } = render(<NotesList notes={notes} />)
+    const items = getAllByRole('menuitem')
     expect(items).toHaveLength(notes.length)
   })
 })
