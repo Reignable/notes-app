@@ -1,0 +1,17 @@
+describe('Updating Notes', () => {
+  it('Should be able to update a note title', () => {
+    cy.visit('/')
+    cy.contains('Add Note').click()
+    cy.get('ul>li:first').click()
+    cy.contains('Edit').should('be.visible')
+    cy.contains('Edit').click()
+    cy.get('input#note-title').should('be.visible')
+    cy.get('input#note-title')
+      .clear()
+      .type('New Note Title')
+    cy.get('input#note-title').should('contain.value', 'New Note Title')
+    cy.contains('View').click()
+    cy.contains('New Note Title').should('be.visible')
+    cy.get('ul>li:first').should('contain.text', 'New Note Title')
+  })
+})
