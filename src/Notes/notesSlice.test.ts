@@ -6,6 +6,7 @@ import notes, {
   selectSelectedNote,
   deleteNote,
   updateNote,
+  selectSelectedNoteId,
 } from './notesSlice'
 
 describe('notes slice', () => {
@@ -192,10 +193,10 @@ describe('notes slice', () => {
           },
         }
         const result = selectSelectedNote(initialState)
-        expect(result).toEqual(undefined)
+        expect(result).toBeUndefined()
       })
 
-      it('should return the id of the selected note if one is selected', () => {
+      it('should return the the selected note if one is selected', () => {
         const initialState: RootState = {
           notes: {
             list: [{ id: 0, title: 'test note', body: 'test note body' }],
@@ -203,7 +204,34 @@ describe('notes slice', () => {
           },
         }
         const result = selectSelectedNote(initialState)
-        expect(result).toEqual(initialState.notes.selected)
+        expect(result).toEqual(
+          initialState.notes.list.find(
+            ({ id }) => id === initialState.notes.selected,
+          ),
+        )
+      })
+    })
+
+    describe('selectSelectedNoteId', () => {
+      it('should return undefined if no note is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+          },
+        }
+        const result = selectSelectedNoteId(initialState)
+        expect(result).toBeUndefined()
+      })
+
+      it('should return the selected note id if one is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+            selected: 0,
+          },
+        }
+        const result = selectSelectedNoteId(initialState)
+        expect(result).toBe(initialState.notes.list[0].id)
       })
     })
   })

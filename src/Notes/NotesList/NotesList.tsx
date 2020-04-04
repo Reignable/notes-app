@@ -5,7 +5,7 @@ import { NotesListItem } from './NotesListItem/NotesListItem'
 
 type NotesListProps = {
   notes: Notes
-  selectedNote?: number
+  selectedNoteId?: Note['id']
   onSelect?(id: Note['id']): void
   onDelete?(id: Note['id']): void
 }
@@ -15,7 +15,7 @@ export const NotesList = (props: NotesListProps) => (
     {props.notes.map(note => (
       <NotesListItem
         key={note.id}
-        selected={props.selectedNote === note.id}
+        selected={props.selectedNoteId === note.id}
         onSelect={props.onSelect}
         onDelete={props.onDelete}
         {...note}

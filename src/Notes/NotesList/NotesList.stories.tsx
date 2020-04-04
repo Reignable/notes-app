@@ -11,4 +11,4 @@ export default { title: 'Notes/Notes List' }
 
 export const WithNotes = () => <NotesList notes={notes} />
 
-export const WithSelected = () => <NotesList notes={notes} selectedNote={1} />
+export const WithSelected = () => <NotesList notes={notes} selectedNoteId={1} />

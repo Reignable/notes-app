@@ -93,9 +93,12 @@ const notesSlice = createSlice({
 
 const baseSelector = (state: RootState): NotesState => state.notes
 export const selectNotesList = createSelector(baseSelector, state => state.list)
-export const selectSelectedNote = createSelector(
+export const selectSelectedNoteId = createSelector(
   baseSelector,
   state => state.selected,
+)
+export const selectSelectedNote = createSelector(baseSelector, state =>
+  state.list.find(({ id }) => id === state.selected),
 )
 
 export const {
