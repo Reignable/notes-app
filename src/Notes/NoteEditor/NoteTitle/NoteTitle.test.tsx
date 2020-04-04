@@ -3,7 +3,7 @@ import React from 'react'
 import userEvent from '@testing-library/user-event'
 import { NoteTitle } from './NoteTitle'
 
-describe.only('NoteTitle', () => {
+describe('NoteTitle', () => {
   it('should display the provided title string when not in edit mode', () => {
     const title = 'Test title'
     const { getByText } = render(<NoteTitle title={title} />)
