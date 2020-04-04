@@ -10,12 +10,15 @@ import {
   selectNote,
   selectNotesList,
   selectSelectedNoteId,
+  selectSelectedNote,
 } from './notesSlice'
+import { NoteEditor } from './NoteEditor/NoteEditor'
 
 export const NotesView = () => {
   const dispatch = useDispatch()
   const notes = useSelector(selectNotesList)
   const selectedNoteId = useSelector(selectSelectedNoteId)
+  const selectedNote = useSelector(selectSelectedNote)
 
   const handleAddNote = () => {
     dispatch(addNote())
@@ -31,6 +34,7 @@ export const NotesView = () => {
 
   return (
     <div data-testid={TEST_ID_NOTES_VIEW}>
+      {selectedNote && <NoteEditor note={selectedNote} />}
       <AddNoteButton onClick={handleAddNote} />
       <NotesList
         notes={notes}

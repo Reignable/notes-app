@@ -1,5 +1,6 @@
-import React from 'react'
 import { Note } from 'Notes/notesSlice'
+import React from 'react'
+import { TEST_ID_NOTE_EDITOR } from 'testIdentifiers'
 import { NoteTitle } from './NoteTitle/NoteTitle'
 
 type NoteEditorProps = {
@@ -19,7 +20,7 @@ export const NoteEditor = (props: NoteEditorProps) => {
   }
 
   return (
-    <>
+    <div data-testid={TEST_ID_NOTE_EDITOR}>
       <button type="button" onClick={handleEditModeToggle}>
         {props.editMode ? 'View' : 'Edit'}
       </button>
@@ -28,6 +29,6 @@ export const NoteEditor = (props: NoteEditorProps) => {
         editMode={props.editMode}
         onChange={handleChange('title')}
       />
-    </>
+    </div>
   )
 }

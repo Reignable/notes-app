@@ -4,6 +4,7 @@ import {
   TEST_ID_ADD_NOTE_BUTTON,
   TEST_ID_NOTES_LIST,
   TEST_ID_NOTES_VIEW,
+  TEST_ID_NOTE_EDITOR,
 } from 'testIdentifiers'
 import { renderWithRedux } from 'utils/testing/renderWithRedux'
 import { NotesView } from './NotesView'
@@ -56,5 +57,32 @@ describe('NotesView', () => {
     expect(getAllByRole('menuitem')).toHaveLength(
       initialState.notes.list.length - 1,
     )
+  })
+
+  it('should not render the editor if no note is selected', () => {
+    const initialState = {
+      notes: {
+        list: [
+          { id: 0, body: 'Note 0 body', title: 'Note 0 title' },
+          { id: 1, body: 'Note 1 body', title: 'Note 1 title' },
+        ],
+      },
+    }
+    const { queryByTestId } = renderWithRedux(<NotesView />, initialState)
+    expect(queryByTestId(TEST_ID_NOTE_EDITOR)).not.toBeInTheDocument()
+  })
+
+  it('should render the editor if a note is selected', () => {
+    const initialState = {
+      notes: {
+        list: [
+          { id: 0, body: 'Note 0 body', title: 'Note 0 title' },
+          { id: 1, body: 'Note 1 body', title: 'Note 1 title' },
+        ],
+        selected: 0,
+      },
+    }
+    const { getByTestId } = renderWithRedux(<NotesView />, initialState)
+    expect(getByTestId(TEST_ID_NOTE_EDITOR)).toBeInTheDocument()
   })
 })
