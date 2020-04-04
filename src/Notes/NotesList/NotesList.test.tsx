@@ -1,11 +1,11 @@
+import { render } from '@testing-library/react'
 import React from 'react'
-import { renderWithRedux } from 'utils/testing/renderWithRedux'
 import { NotesList } from './NotesList'
 
 describe('NotesList', () => {
   it('should render the provided notes', () => {
     const notes = [{ id: 0, title: 'note 1', body: 'this is note 1 body' }]
-    const { getByRole } = renderWithRedux(<NotesList notes={notes} />)
+    const { getByRole } = render(<NotesList notes={notes} />)
     expect(getByRole('menuitem')).toBeInTheDocument()
   })
 
@@ -14,8 +14,8 @@ describe('NotesList', () => {
       { id: 0, title: 'note 1', body: 'this is note 1 body' },
       { id: 1, title: 'note 2', body: 'this is note 2 body' },
     ]
-    const { getAllByTestId } = renderWithRedux(<NotesList notes={notes} />)
-    const items = getAllByTestId(/notes-list-item-\d*$/)
+    const { getAllByRole } = render(<NotesList notes={notes} />)
+    const items = getAllByRole('menuitem')
     expect(items).toHaveLength(notes.length)
   })
 })

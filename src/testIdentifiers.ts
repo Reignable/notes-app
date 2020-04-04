@@ -1,6 +1,3 @@
 export const TEST_ID_ADD_NOTE_BUTTON = 'add-note-button'
 export const TEST_ID_NOTES_VIEW = 'notes-view'
 export const TEST_ID_NOTES_LIST = 'notes-list'
-export const TEST_ID_NOTES_LIST_ITEM = 'notes-list-item'
-export const TEST_ID_NOTES_LIST_ITEM_TITLE = 'notes-list-item-title'
-export const TEST_ID_NOTES_LIST_ITEM_BODY = 'notes-list-item-body'

@@ -1,19 +1,20 @@
-import { Note, selectNote } from 'Notes/notesSlice'
+import { Note } from 'Notes/notesSlice'
 import React from 'react'
-import {
-  TEST_ID_NOTES_LIST_ITEM,
-  TEST_ID_NOTES_LIST_ITEM_BODY,
-  TEST_ID_NOTES_LIST_ITEM_TITLE,
-} from 'testIdentifiers'
-import { useDispatch } from 'react-redux'
 
-type NotesListItemProps = Note & { selected?: boolean }
+type NotesListItemProps = Note & {
+  selected?: boolean
+  onSelect?(id: Note['id']): void
+  onDelete?(id: Note['id']): void
+}
 
 export const NotesListItem = (props: NotesListItemProps) => {
-  const dispatch = useDispatch()
-
   const handleSelectNote = () => {
-    dispatch(selectNote(props.id))
+    if (props.onSelect) props.onSelect(props.id)
+  }
+
+  const handleDeleteNote = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation()
+    if (props.onDelete) props.onDelete(props.id)
   }
 
   return (
@@ -22,14 +23,12 @@ export const NotesListItem = (props: NotesListItemProps) => {
       style={{ fontWeight: props.selected ? 'bolder' : 'normal' }}
       onClick={handleSelectNote}
       onKeyUp={handleSelectNote}
-      data-testid={`${TEST_ID_NOTES_LIST_ITEM}-${props.id}`}
     >
-      <p data-testid={`${TEST_ID_NOTES_LIST_ITEM_TITLE}-${props.id}`}>
-        {props.title}
-      </p>
-      <p data-testid={`${TEST_ID_NOTES_LIST_ITEM_BODY}-${props.id}`}>
-        {props.body}
-      </p>
+      <p>{props.title}</p>
+      <p>{props.body}</p>
+      <button type="button" onClick={handleDeleteNote}>
+        Delete
+      </button>
     </li>
   )
 }
