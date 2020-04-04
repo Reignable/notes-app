@@ -58,15 +58,53 @@ const notesSlice = createSlice({
         }
       },
     },
+    updateNote: {
+      prepare: (
+        id: Note['id'],
+        newValues: Partial<Omit<Note, 'id'>>,
+      ): ReturnType<
+        PrepareAction<{
+          id: Note['id']
+          title?: Note['title']
+          body?: Note['body']
+        }>
+      > => ({
+        payload: { id, ...newValues },
+      }),
+      reducer: (
+        state,
+        action: PayloadAction<{
+          id: Note['id']
+          title?: Note['title']
+          body?: Note['body']
+        }>,
+      ): void => {
+        const { id, title, body } = action.payload
+        const note = state.list.find(n => n.id === id)
+        if (note) {
+          const index = state.list.indexOf(note)
+          if (title !== undefined) state.list[index].title = title
+          if (body !== undefined) state.list[index].body = body
+        }
+      },
+    },
   },
 })
 
 const baseSelector = (state: RootState): NotesState => state.notes
 export const selectNotesList = createSelector(baseSelector, state => state.list)
-export const selectSelectedNote = createSelector(
+export const selectSelectedNoteId = createSelector(
   baseSelector,
   state => state.selected,
 )
+export const selectSelectedNote = createSelector(baseSelector, state =>
+  state.list.find(({ id }) => id === state.selected),
+)
 
-export const { addNote, selectNote, deleteNote } = notesSlice.actions
+export const {
+  addNote,
+  selectNote,
+  deleteNote,
+  updateNote,
+} = notesSlice.actions
 export default notesSlice.reducer

@@ -29,7 +29,7 @@ export const WithoutNotes = () => (
 export const WithSelected = () => (
   <NotesList
     notes={notes}
-    selectedNote={1}
+    selectedNoteId={1}
     onDelete={action('onDelete')}
     onSelect={action('onSelect')}
   />

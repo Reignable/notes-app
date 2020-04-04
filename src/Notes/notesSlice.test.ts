@@ -5,6 +5,8 @@ import notes, {
   selectNotesList,
   selectSelectedNote,
   deleteNote,
+  updateNote,
+  selectSelectedNoteId,
 } from './notesSlice'
 
 describe('notes slice', () => {
@@ -109,6 +111,65 @@ describe('notes slice', () => {
         expect(result.selected).toBeUndefined()
       })
     })
+
+    describe('updateNote', () => {
+      it('should set the new note title', () => {
+        const initialState = {
+          list: [{ id: 0, body: 'Old body', title: 'Old title' }],
+        }
+        const id = 0
+        const newTitle = 'New title'
+        const result = notes(initialState, updateNote(id, { title: newTitle }))
+        expect(result.list.find(note => note.id === id)?.title).toBe(newTitle)
+      })
+
+      it('should set the new note body', () => {
+        const initialState = {
+          list: [{ id: 0, body: 'Old body', title: 'Old title' }],
+        }
+        const id = 0
+        const newBody = 'New body'
+        const result = notes(initialState, updateNote(id, { body: newBody }))
+        expect(result.list.find(note => note.id === id)?.body).toBe(newBody)
+      })
+
+      it('should set both title and body', () => {
+        const initialState = {
+          list: [{ id: 0, body: 'Old body', title: 'Old title' }],
+        }
+        const noteId = 0
+        const newTitle = 'New title'
+        const newBody = 'New body'
+        const result = notes(
+          initialState,
+          updateNote(noteId, { title: newTitle, body: newBody }),
+        )
+        expect(result.list.find(({ id }) => id === noteId)?.title).toBe(
+          newTitle,
+        )
+        expect(result.list.find(({ id }) => id === noteId)?.body).toBe(newBody)
+      })
+
+      it('should not update any other notes', () => {
+        const initialState = {
+          list: [
+            { id: 0, body: '0 body', title: '0 title' },
+            { id: 1, body: '1 body', title: '1 title' },
+            { id: 2, body: '2 body', title: '2 title' },
+            { id: 3, body: '3 body', title: '3 title' },
+          ],
+        }
+        const id = 2
+        const newNote = { body: 'New body', title: 'New title' }
+        const result = notes(initialState, updateNote(id, newNote))
+        result.list
+          .filter(note => note.id !== id)
+          .forEach(note => {
+            expect(note.title).not.toBe(newNote.title)
+            expect(note.body).not.toBe(newNote.body)
+          })
+      })
+    })
   })
 
   describe('selectors', () => {
@@ -132,10 +193,10 @@ describe('notes slice', () => {
           },
         }
         const result = selectSelectedNote(initialState)
-        expect(result).toEqual(undefined)
+        expect(result).toBeUndefined()
       })
 
-      it('should return the id of the selected note if one is selected', () => {
+      it('should return the the selected note if one is selected', () => {
         const initialState: RootState = {
           notes: {
             list: [{ id: 0, title: 'test note', body: 'test note body' }],
@@ -143,7 +204,34 @@ describe('notes slice', () => {
           },
         }
         const result = selectSelectedNote(initialState)
-        expect(result).toEqual(initialState.notes.selected)
+        expect(result).toEqual(
+          initialState.notes.list.find(
+            ({ id }) => id === initialState.notes.selected,
+          ),
+        )
+      })
+    })
+
+    describe('selectSelectedNoteId', () => {
+      it('should return undefined if no note is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+          },
+        }
+        const result = selectSelectedNoteId(initialState)
+        expect(result).toBeUndefined()
+      })
+
+      it('should return the selected note id if one is selected', () => {
+        const initialState: RootState = {
+          notes: {
+            list: [{ id: 0, title: 'test note', body: 'test note body' }],
+            selected: 0,
+          },
+        }
+        const result = selectSelectedNoteId(initialState)
+        expect(result).toBe(initialState.notes.list[0].id)
       })
     })
   })
