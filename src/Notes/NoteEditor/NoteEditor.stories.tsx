@@ -18,7 +18,7 @@ export const WithTitleAndBody = () => (
 
 export const EditMode = () => (
   <NoteEditor
-    note={{ title: 'Note title', body: '' }}
+    note={{ title: 'Note title', body: 'enter text here' }}
     editMode
     onChange={action('onChange')}
   />
