@@ -140,4 +140,28 @@ describe('Updating Notes', () => {
       ).toBe(newTitle)
     })
   })
+
+  it('should update a note body when the body input is changed', async () => {
+    const initialState = {
+      notes: {
+        list: [{ id: 0, body: 'Note 0 body', title: 'Note 0 title' }],
+        selected: 0,
+      },
+    }
+    const newBody = 'New body'
+    const { getByText, getByLabelText, store } = renderWithRedux(
+      <NotesView />,
+      initialState,
+    )
+    userEvent.click(getByText('Edit'))
+    userEvent.type(getByLabelText('Body'), newBody)
+    await wait(() => {
+      expect(
+        store
+          .getState()
+          .notes.list.find(({ id }) => id === initialState.notes.selected)
+          ?.body,
+      ).toBe(newBody)
+    })
+  })
 })

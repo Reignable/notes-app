@@ -2,6 +2,7 @@ import { Note } from 'Notes/notesSlice'
 import React from 'react'
 import { TEST_ID_NOTE_EDITOR } from 'testIdentifiers'
 import { NoteTitle } from './NoteTitle/NoteTitle'
+import { NoteBody } from './NoteBody/NoteBody'
 
 type NoteEditorProps = {
   note: Omit<Note, 'id'>
@@ -28,6 +29,11 @@ export const NoteEditor = (props: NoteEditorProps) => {
         title={props.note.title}
         editMode={props.editMode}
         onChange={handleChange('title')}
+      />
+      <NoteBody
+        body={props.note.body}
+        editMode={props.editMode}
+        onChange={handleChange('body')}
       />
     </div>
   )

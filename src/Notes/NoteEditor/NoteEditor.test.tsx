@@ -24,9 +24,19 @@ describe('NoteEditor', () => {
     expect(getByText(note.title)).toBeInTheDocument()
   })
 
+  it('should render the note body', () => {
+    const { getByText, note } = setup()
+    expect(getByText(note.body)).toBeInTheDocument()
+  })
+
   it('should render an input for the title when in edit mode', () => {
     const { getByLabelText } = setup(true)
     expect(getByLabelText('Title')).toBeInTheDocument()
+  })
+
+  it('should render an input for the body when in edit mode', () => {
+    const { getByLabelText } = setup(true)
+    expect(getByLabelText('Body')).toBeInTheDocument()
   })
 
   it('should call the on change function when the title text changes', () => {
@@ -42,6 +52,22 @@ describe('NoteEditor', () => {
     expect(handleChange).toHaveBeenLastCalledWith({
       title: newTitle,
       body: note.body,
+    })
+  })
+
+  it('should call the onChange function when the body text changes', () => {
+    const { getByLabelText, handleChange } = setup(true)
+    userEvent.type(getByLabelText('Body'), 'New body')
+    expect(handleChange).toHaveBeenCalled()
+  })
+
+  it('should call the onChange function with the new body when the body changes', () => {
+    const newBody = 'New body'
+    const { getByLabelText, handleChange, note } = setup(true)
+    userEvent.type(getByLabelText('Body'), newBody)
+    expect(handleChange).toHaveBeenLastCalledWith({
+      title: note.title,
+      body: newBody,
     })
   })
 
