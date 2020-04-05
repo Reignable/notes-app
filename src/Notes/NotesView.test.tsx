@@ -10,7 +10,7 @@ import {
 import { renderWithRedux } from 'utils/testing/renderWithRedux'
 import { NotesView } from './NotesView'
 
-describe('NotesView', () => {
+describe('Elements', () => {
   it('should have a root element', () => {
     const { getByTestId } = renderWithRedux(<NotesView />)
     expect(getByTestId(TEST_ID_NOTES_VIEW)).toBeInTheDocument()
@@ -25,41 +25,43 @@ describe('NotesView', () => {
     const { getByTestId } = renderWithRedux(<NotesView />)
     expect(getByTestId(TEST_ID_NOTES_LIST)).toBeInTheDocument()
   })
+})
 
-  it('should add a note to the list when the button is clicked', () => {
-    const { getByTestId, store } = renderWithRedux(<NotesView />)
-    userEvent.click(getByTestId(TEST_ID_ADD_NOTE_BUTTON))
-    expect(store.getState().notes.list).toHaveLength(1)
-  })
+it('should add a note to the list when the button is clicked', () => {
+  const { getByTestId, store } = renderWithRedux(<NotesView />)
+  userEvent.click(getByTestId(TEST_ID_ADD_NOTE_BUTTON))
+  expect(store.getState().notes.list).toHaveLength(1)
+})
 
-  it('should set a note item to selected on click', () => {
-    const initialState = {
-      notes: { list: [{ id: 0, body: 'Note body', title: 'Note title' }] },
-    }
-    const { getByText, store } = renderWithRedux(<NotesView />, initialState)
-    userEvent.click(getByText('Note title'))
-    expect(store.getState().notes.selected).toBe(initialState.notes.list[0].id)
-  })
+it('should set a note item to selected on click', () => {
+  const initialState = {
+    notes: { list: [{ id: 0, body: 'Note body', title: 'Note title' }] },
+  }
+  const { getByText, store } = renderWithRedux(<NotesView />, initialState)
+  userEvent.click(getByText('Note title'))
+  expect(store.getState().notes.selected).toBe(initialState.notes.list[0].id)
+})
 
-  it('should remove a note when the delete button is clicked', () => {
-    const initialState = {
-      notes: {
-        list: [
-          { id: 0, body: 'Note body', title: 'Note title' },
-          { id: 1, body: 'Note body', title: 'Note title' },
-        ],
-      },
-    }
-    const { getAllByText, getAllByRole } = renderWithRedux(
-      <NotesView />,
-      initialState,
-    )
-    userEvent.click(getAllByText('Delete')[0])
-    expect(getAllByRole('menuitem')).toHaveLength(
-      initialState.notes.list.length - 1,
-    )
-  })
+it('should remove a note when the delete button is clicked', () => {
+  const initialState = {
+    notes: {
+      list: [
+        { id: 0, body: 'Note body', title: 'Note title' },
+        { id: 1, body: 'Note body', title: 'Note title' },
+      ],
+    },
+  }
+  const { getAllByText, getAllByRole } = renderWithRedux(
+    <NotesView />,
+    initialState,
+  )
+  userEvent.click(getAllByText('Delete')[0])
+  expect(getAllByRole('menuitem')).toHaveLength(
+    initialState.notes.list.length - 1,
+  )
+})
 
+describe('Editor', () => {
   it('should not render the editor if no note is selected', () => {
     const initialState = {
       notes: {
@@ -112,7 +114,9 @@ describe('NotesView', () => {
     userEvent.click(getByText('View'))
     expect(queryByLabelText('Title')).not.toBeInTheDocument()
   })
+})
 
+describe('Updating Notes', () => {
   it('should update a note title when the title input is changed', async () => {
     const initialState = {
       notes: {
