@@ -40,7 +40,7 @@ PrimaryTextAndIcon.story = {
   },
 }
 
-export const Secondary = () => <Button>Secondary</Button>
+export const Secondary = () => <Button variation="secondary">Secondary</Button>
 Secondary.story = {
   parameters: {
     design: {
@@ -51,7 +51,9 @@ Secondary.story = {
   },
 }
 
-export const SecondaryIcon = () => <Button>Secondary</Button>
+export const SecondaryIcon = () => (
+  <Button variation="secondary">Secondary</Button>
+)
 SecondaryIcon.story = {
   parameters: {
     design: {
@@ -62,7 +64,9 @@ SecondaryIcon.story = {
   },
 }
 
-export const SecondaryIconAndText = () => <Button>Secondary</Button>
+export const SecondaryIconAndText = () => (
+  <Button variation="secondary">Secondary</Button>
+)
 SecondaryIconAndText.story = {
   parameters: {
     design: {
