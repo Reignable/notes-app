@@ -3,12 +3,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from 'store'
+import { ThemeProvider } from 'styled-components'
 import './fonts.css'
 import * as serviceWorker from './serviceWorker'
+import * as themes from './themes'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={themes.light}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root'),
 )
