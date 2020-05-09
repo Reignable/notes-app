@@ -11,7 +11,7 @@ Primary.story = {
       name: 'Primary',
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A25',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A390',
     },
   },
 }
@@ -23,19 +23,19 @@ PrimaryIcon.story = {
       name: 'Primary Icon',
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A26',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A387',
     },
   },
 }
 
-export const PrimaryTextAndIcon = () => <Button>Primary</Button>
-PrimaryTextAndIcon.story = {
+export const PrimaryIconAndText = () => <Button>Primary</Button>
+PrimaryIconAndText.story = {
   parameters: {
     design: {
       name: 'Primary Icon',
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A27',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A360',
     },
   },
 }
@@ -46,7 +46,7 @@ Secondary.story = {
     design: {
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A35',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A389',
     },
   },
 }
@@ -59,7 +59,7 @@ SecondaryIcon.story = {
     design: {
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A36',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A388',
     },
   },
 }
@@ -72,7 +72,7 @@ SecondaryIconAndText.story = {
     design: {
       type: 'figma',
       url:
-        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=70%3A39',
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A367',
     },
   },
 }
