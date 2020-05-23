@@ -1,33 +1,40 @@
 import 'styled-components'
 
 type Color = {
-  light: string
-  main: string
-  dark: string
+  50?: string
+  100?: string
+  200?: string
+  300?: string
+  400?: string
+  500: string
+  600?: string
+  700: string
+  800?: string
+  900: string
 }
 
 declare module 'styled-components' {
-  export type Color = {
-    light: string
-    main: string
-    dark: string
+  export type BaseTheme<C> = {
+    colors: {
+      [K in C]: Color
+    }
   }
 
-  export type BaseTheme = {
-    colors: {
-      primary: Color
-      secondary: Color
+  type ButtonVariation = {
+    backgroundColor: string
+    color: string
+    hover: {
+      backgroundColor: string
+    }
+    focus: {
+      borderColor: string
     }
   }
 
   export interface DefaultTheme extends BaseTheme {
     button: {
-      primary: {
-        backgroundColor: string
-      }
-      secondary: {
-        backgroundColor: string
-      }
+      primary: ButtonVariation
+      secondary: ButtonVariation
     }
   }
 }

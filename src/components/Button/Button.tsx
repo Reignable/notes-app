@@ -12,7 +12,7 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   box-sizing: content-box;
-  color: ${props => (props.variation === 'primary' ? '#263238' : '#ECEFF1')};
+  color: ${props => props.theme.button[props.variation || 'primary'].color};
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
@@ -21,17 +21,23 @@ const StyledButton = styled.button<ButtonProps>`
     border-width 250ms ease, padding 250ms ease;
 
   &:hover {
-    background-color: #f57c00;
+    background-color: ${props =>
+      props.theme.button[props.variation || 'primary'].hover.backgroundColor};
   }
 
   &:focus {
-    border: 2px solid #f57c00;
+    box-shadow: 0 0 0 2px
+        ${props =>
+          props.theme.button[props.variation || 'primary'].focus.borderColor},
+      0px 4px 6px rgba(0, 0, 0, 0.25);
     outline: none;
-    padding: 14px;
   }
 
   &:active {
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 2px
+        ${props =>
+          props.theme.button[props.variation || 'primary'].focus.borderColor},
+      0px 2px 2px rgba(0, 0, 0, 0.25);
   }
 `
 
