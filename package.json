@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "test:chromatic": "yarn chromatic --project-token=39jhkq60vox"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "babel-loader": "^8.1.0",
+    "chromatic": "^4.0.3",
     "concurrently": "^5.1.0",
     "cypress": "^4.2.0",
     "eslint": "^6.7.1",
