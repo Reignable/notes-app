@@ -16,7 +16,7 @@ Primary.story = {
   },
 }
 
-export const PrimaryIcon = () => <Button>Primary</Button>
+export const PrimaryIcon = () => <Button icon="plus" />
 PrimaryIcon.story = {
   parameters: {
     design: {
@@ -28,7 +28,7 @@ PrimaryIcon.story = {
   },
 }
 
-export const PrimaryIconAndText = () => <Button>Primary</Button>
+export const PrimaryIconAndText = () => <Button icon="plus">Primary</Button>
 PrimaryIconAndText.story = {
   parameters: {
     design: {
@@ -51,9 +51,7 @@ Secondary.story = {
   },
 }
 
-export const SecondaryIcon = () => (
-  <Button variation="secondary">Secondary</Button>
-)
+export const SecondaryIcon = () => <Button variation="secondary" icon="plus" />
 SecondaryIcon.story = {
   parameters: {
     design: {
@@ -65,7 +63,9 @@ SecondaryIcon.story = {
 }
 
 export const SecondaryIconAndText = () => (
-  <Button variation="secondary">Secondary</Button>
+  <Button variation="secondary" icon="plus">
+    Secondary
+  </Button>
 )
 SecondaryIconAndText.story = {
   parameters: {

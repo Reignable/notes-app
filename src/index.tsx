@@ -7,6 +7,9 @@ import { ThemeProvider } from 'styled-components'
 import './fonts.css'
 import * as serviceWorker from './serviceWorker'
 import * as themes from './themes'
+import initializeIcons from './initializeIcons'
+
+initializeIcons()
 
 ReactDOM.render(
   <Provider store={store}>
