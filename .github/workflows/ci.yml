@@ -31,3 +31,14 @@ jobs:
         run: yarn test
         env:
           CI: true
+  ui-test:
+    name: Visual Regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+      - uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.CHROMATIC_GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
