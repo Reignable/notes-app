@@ -35,6 +35,7 @@ declare module 'styled-components' {
     button: {
       primary: ButtonVariation
       secondary: ButtonVariation
+      destructive: ButtonVariation
     }
   }
 }

@@ -1,7 +1,12 @@
 import { DefaultTheme, BaseTheme } from 'styled-components'
 
-const base: BaseTheme<'blueGray' | 'orange'> = {
+const base: BaseTheme<'blueGray' | 'orange' | 'red'> = {
   colors: {
+    red: {
+      '500': '#F44336',
+      '700': '#D32F2F',
+      '900': '#B71C1C',
+    },
     blueGray: {
       '50': '#ECEFF1',
       '500': '#607D8B',
@@ -37,6 +42,16 @@ const light: DefaultTheme = {
       },
       focus: {
         borderColor: base.colors.blueGray[700],
+      },
+    },
+    destructive: {
+      backgroundColor: base.colors.red[500],
+      color: base.colors.blueGray[50] ?? '#fff',
+      hover: {
+        backgroundColor: base.colors.red[700],
+      },
+      focus: {
+        borderColor: base.colors.red[700],
       },
     },
   },

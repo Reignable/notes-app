@@ -3,7 +3,7 @@ import { Button } from './Button'
 
 export default { title: 'Components/Button' }
 
-export const Primary = () => <Button>Primary</Button>
+export const Primary = () => <Button>Button</Button>
 Primary.story = {
   name: 'Primary',
   parameters: {
@@ -28,7 +28,7 @@ PrimaryIcon.story = {
   },
 }
 
-export const PrimaryIconAndText = () => <Button icon="plus">Primary</Button>
+export const PrimaryIconAndText = () => <Button icon="plus">Button</Button>
 PrimaryIconAndText.story = {
   parameters: {
     design: {
@@ -40,7 +40,7 @@ PrimaryIconAndText.story = {
   },
 }
 
-export const Secondary = () => <Button variation="secondary">Secondary</Button>
+export const Secondary = () => <Button variation="secondary">Button</Button>
 Secondary.story = {
   parameters: {
     design: {
@@ -64,7 +64,7 @@ SecondaryIcon.story = {
 
 export const SecondaryIconAndText = () => (
   <Button variation="secondary" icon="plus">
-    Secondary
+    Button
   </Button>
 )
 SecondaryIconAndText.story = {
@@ -73,6 +73,45 @@ SecondaryIconAndText.story = {
       type: 'figma',
       url:
         'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=188%3A367',
+    },
+  },
+}
+
+export const Destructive = () => <Button variation="destructive">Button</Button>
+Destructive.story = {
+  parameters: {
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=342%3A262',
+    },
+  },
+}
+
+export const DestructiveIcon = () => (
+  <Button variation="destructive" icon="trash" />
+)
+DestructiveIcon.story = {
+  parameters: {
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=342%3A293',
+    },
+  },
+}
+
+export const DestructiveIconAndText = () => (
+  <Button variation="destructive" icon="trash">
+    Button
+  </Button>
+)
+DestructiveIcon.story = {
+  parameters: {
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/rMFKW2PzYWGoGZaXxc3SgR/App?node-id=342%3A288',
     },
   },
 }

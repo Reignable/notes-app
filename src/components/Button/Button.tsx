@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variation: 'primary' | 'secondary'
+  variation: 'primary' | 'secondary' | 'destructive'
   icon?: IconName
 }
 
